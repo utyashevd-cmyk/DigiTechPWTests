@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Тестирование хедера сайта', () => {
-  test('Проверка href в элементах хэдера', async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.goto('https://digi-tech.dev/');
-
+  });
+  test('Проверка href в элементах хэдера', async ({ page }) => {
     await expect(
       page.getByRole('banner').getByRole('link', { name: 'Индивидуальная разработка' }),
     ).toHaveAttribute('href', '/individual_development/');
@@ -41,7 +42,6 @@ test.describe('Тестирование хедера сайта', () => {
   });
 
   test('Проверка переходов по ссылкам в хэдере', async ({ page }) => {
-    await page.goto('https://digi-tech.dev/');
     await page
       .getByRole('navigation')
       .getByRole('link', { name: 'Индивидуальная разработка' })
